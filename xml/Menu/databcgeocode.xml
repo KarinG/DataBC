@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/admin/bcdatageocode</path>
+    <page_callback>CRM_DataBCGeocode_Form_Settings</page_callback>
+    <title>BCData Geocode Settings</title>
+    <access_arguments>administer CiviCRM</access_arguments>
+  </item>
+</menu>

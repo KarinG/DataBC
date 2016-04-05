@@ -195,7 +195,27 @@ function databcgeocode_format_address($address) {
 
 function databcgeocode_get_coordinates($address) {
   
-  $query = "http://apps.gov.bc.ca/pub/geocoder/addresses.geojson?addressString={$address}";
+  $minScore = CRM_Core_BAO_Setting::getItem('bcdatageocode',
+    'match_threshold',
+    NULL,
+    CRM_DataBCGeocode_Form_Settings::D_THRESHOLD);
+
+  $selectedPrecision = CRM_Core_BAO_Setting::getItem('bcdatageocode',
+    'match_precision',
+    NULL,
+    CRM_DataBCGeocode_Form_Settings::D_PRECISION);
+
+  // build the query string of precisions up to the max selected
+  $precisions = array();
+  foreach (CRM_DataBCGeocode_Form_Settings::PRECISIONS as $mc) {
+    $precisions[] = $mc;
+    if ($mc == $selectedPrecision) {
+      break;
+    } 
+  }
+  $matchPrecisions = urlencode(implode(',', $precisions));
+
+  $query = "http://apps.gov.bc.ca/pub/geocoder/addresses.geojson?minScore={$minScore}&matchPrecision={$matchPrecisions}&addressString={$address}";
 
   require_once 'HTTP/Request.php';
   $request = new HTTP_Request($query);
@@ -203,7 +223,8 @@ function databcgeocode_get_coordinates($address) {
   $string = $request->getResponseBody();
   $result = json_decode($string, TRUE);
 
-  if ($result && isset($result['features'])) {
+//drupal_set_message('here: ' . $query);
+  if ($result && isset($result['features'][0])) {
 //drupal_set_message(print_r($result,TRUE));
     $first_match = array_shift($result['features']);
     if (isset($first_match['geometry']['coordinates'])) {
