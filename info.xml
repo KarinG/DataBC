@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<extension key="com.semperit.databcgeocode" type="module">
+  <file>databcgeocode</file>
+  <name>Data BC Physical Address Geocoder</name>
+  <description>Submits addresses to the Data BC Physical Address Geocoder (http://www.data.gov.bc.ca/dbc/geographic/locate/geocoding.page). A replacement for Google geocoding for orgs based in British Columbia, Canada.</description>
+  <license>AGPL-3.0</license>
+  <maintainer>
+    <author>Karin Gerritsen, Jake Martin White</author>
+    <email>karin@semper-it.com</email>
+  </maintainer>
+  <urls>
+  </urls>
+  <releaseDate>2016-04-04</releaseDate>
+  <version>0.9</version>
+  <develStage>beta</develStage>
+  <compatibility>
+    <ver>4.4</ver>
+    <ver>4.6</ver>
+  </compatibility>
+  <comments></comments>
+  <civix>
+    <namespace>CRM/DataBCGeocode</namespace>
+  </civix>
+</extension>
