@@ -123,9 +123,38 @@ function databcgeocode_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 }
 
 /**
+ * Implements hook_civicrm_buildForm.
+ * Update the form at settings page: civicrm/admin/setting/mapping?reset=1
+ * Create a selection option: databc
+ *
+ */
+function databcgeocode_civicrm_buildForm($formName, &$form) {
+
+  if ($formName != 'CRM_Admin_Form_Setting_Mapping') {
+    return;
+  }
+
+  // Ok we're on the right form - GeoCoder Provider is Element #4 (CiviCRM 4.4):
+  $geo = CRM_Core_SelectValues::geoProvider();
+  $backup_geo = $geo;
+  $geo['DataBC'] = 'DataBC';
+  // add DataBC option to existing GeoCoder Providers:
+  $form->addElement('select', 'geoProvider', ts('Geocoding Provider'), array('' => '- select -') + $geo);
+  // add Backup_GeoCoder Provider (for non BC addresses):
+  $form->addElement('select', 'backup_geoProvider', ts('Backup Geocoding Provider'), array('' => '- select -') + $backup_geo);
+
+  // add our template:
+  CRM_Core_Region::instance('page-body')->add(array(
+    'template' => 'CRM/DataBCGeocode/DataBCAdmin.tpl'
+  ));
+
+  $test = 1;
+}
+
+/**
  * Implements hook_civicrm_post().
  * Update coordinates when an address is created/updated.
- * 
+ *
  * TODO: DataBC request should be queued and processed asynchronously so as not to block an
  *   operation (such as a backoffice edit or worse: an online donation) if DataBC systems are
  *   slow/offline. However other Civi geocoders don't do this -- not good architecture!
@@ -182,7 +211,7 @@ function databcgeocode_format_address($address) {
   }
 
   // The BCData geocoder does not look at postal code. Civic address only.
-  // TODO: should the request consider supplemental_address_1 & 2? 
+  // TODO: should the request consider supplemental_address_1 & 2?
   $add = $address->street_address . ', ' . $address->city;
 
   if ($address->state_province_id != 'null') {
@@ -194,7 +223,7 @@ function databcgeocode_format_address($address) {
 }
 
 function databcgeocode_get_coordinates($address) {
-  
+
   $minScore = CRM_Core_BAO_Setting::getItem('bcdatageocode',
     'match_threshold',
     NULL,
@@ -211,7 +240,7 @@ function databcgeocode_get_coordinates($address) {
     $precisions[] = $mc;
     if ($mc == $selectedPrecision) {
       break;
-    } 
+    }
   }
   $matchPrecisions = urlencode(implode(',', $precisions));
 
