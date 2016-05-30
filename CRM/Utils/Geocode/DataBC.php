@@ -117,10 +117,7 @@ class CRM_Utils_Geocode_DataBC {
       }
     }
     $matchPrecisions = urlencode(implode(',', $precisions));
-
-    // KG - Query example:
-    // $query = "http://apps.gov.bc.ca/pub/geocoder/addresses.geojson?minScore=80&matchPrecision=CIVIC_NUMBER%2CBLOCK%2CSTREET&addressString=207+279+Tyee+Rd%2C+Victoria%2C+BC";
-
+    
     $query = 'http://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
 
     require_once 'HTTP/Request.php';
