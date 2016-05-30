@@ -62,13 +62,30 @@ class CRM_Utils_Geocode_DataBC {
    */
   static function format(&$values, $stateName = FALSE) {
     // we need a BC Province: 1101
-    if (CRM_Utils_Array::value('state_province_id', $values) != '1101') {
-      // Retrieve Backup method from the database
-      // call it
-      return FALSE;
-    }
+    $test = 0;
 
     $config = CRM_Core_Config::singleton();
+
+    if (CRM_Utils_Array::value('state_province_id', $values) != '1101') {
+      // if we get here we are NOT in British Columbia - try BackUp method!
+      $backupgeoProvider = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'backup_geoProvider');
+
+      if ($backupgeoProvider == 'Google') {
+        require_once('CRM/Utils/Geocode/Google.php');
+        $class = new CRM_Utils_Geocode_Google();
+        $class->format($values, $stateName = FALSE);
+        return TRUE;
+      }
+      elseif ($backupgeoProvider == 'Yahoo') {
+        require_once('CRM/Utils/Geocode/Yahoo.php');
+        $class = new CRM_Utils_Geocode_Yahoo();
+        $class->format($values, $stateName = FALSE);
+        return TRUE;
+      }
+      elseif (empty($backupgeoProvider)) {
+        return FALSE;
+      }
+    }
 
     // require a street address and a city
     if (!CRM_Utils_Array::value('street_address', $values) || !CRM_Utils_Array::value('city', $values)) {
