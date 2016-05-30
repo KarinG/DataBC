@@ -10,6 +10,12 @@
   </div>
 {/foreach}
 
+<div id="DataBC_help">
+  <div class="help">
+    {ts}Please note: we will only use the backup method to GeoCode non-BC addresses!{/ts}
+  </div>
+</div>
+
 {* FOOTER *}
 <div class="crm-submit-buttons">
 {include file="CRM/common/formButtons.tpl" location="bottom"}

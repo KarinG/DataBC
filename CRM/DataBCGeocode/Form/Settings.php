@@ -26,6 +26,10 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     }
     $this->addRadio('match_precision', ts('Match Precision'), $precisions, NULL, '<br />');
 
+    // add Backup_GeoCoder Provider (for non BC addresses):
+    $backup_geo = CRM_Core_SelectValues::geoProvider();
+    $this->addElement('select', 'backup_geoProvider', ts('Backup Geocoding Provider'), array('' => '- select -') + $backup_geo);
+
     $this->addButtons(array(
       array(
         'type' => 'submit',
@@ -44,6 +48,7 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     $defaults = array(
       'match_threshold' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_threshold', NULL, self::D_THRESHOLD),
       'match_precision' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_precision', NULL, self::D_PRECISION),
+      'backup_geoProvider' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'backup_geoProvider', NULL, self::D_PRECISION),
     );
 
     return $defaults;
@@ -57,6 +62,7 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
       CRM_Core_BAO_Setting::setItem($values['match_threshold'], 'bcdatageocode', 'match_threshold');
       CRM_Core_BAO_Setting::setItem($values['match_precision'], 'bcdatageocode', 'match_precision');
     }
+    CRM_Core_BAO_Setting::setItem($values['backup_geoProvider'], 'bcdatageocode', 'backup_geoProvider');
 
     parent::postProcess();
 
@@ -70,7 +76,7 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
   function getRenderableElementNames() {
     // The _elements list includes some items which should not be
     // auto-rendered in the loop -- such as "qfKey" and "buttons".  These
-    // items don't have labels.  We'll identify renderable by filtering on
+    // items don't have labels. We'll identify renderable by filtering on
     // the 'label'.
     $elementNames = array();
     foreach ($this->_elements as $element) {

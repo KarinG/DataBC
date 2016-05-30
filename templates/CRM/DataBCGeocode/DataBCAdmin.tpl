@@ -1,18 +1,17 @@
 {*
- Extra fields for iats direct debit, template for CAD
+ Extra fields for DataBC
 *}
-<div id="help">
-  {ts}Please note: if you select DataBC above - also pick a backup method below:{/ts}
+
+<div id="DataBC_help">
+  <div class="help">
+    {ts}Please note: if you have selected DataBC above - you will likely want to select a backup method - to GeoCode non-BC addresses - on the {/ts}
+    <a href="databcgeocode">DataBC admin settings page</a>
+  </div>
 </div>
-    <div id="DataBC">
-      <div class="crm-section backup_geoProvider">
-        <div class="label">{$form.backup_geoProvider.label}</div>
-        <div class="content">{$form.backup_geoProvider.html}</div>
-        <div class="clear"></div>
-      </div>
-    </div>
+
 {literal}<script type="text/javascript">
   cj(function ($) {
+    ($('#DataBC_help')).insertAfter($('.crm-map-form-block-geoAPIKey'));
   });
 </script>
 {/literal}
