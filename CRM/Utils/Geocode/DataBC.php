@@ -117,7 +117,7 @@ class CRM_Utils_Geocode_DataBC {
       }
     }
     $matchPrecisions = urlencode(implode(',', $precisions));
-    
+
     $query = 'http://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
 
     require_once 'HTTP/Request.php';
@@ -146,7 +146,7 @@ class CRM_Utils_Geocode_DataBC {
 
     // TODO: should we limit the precision to avoid geocodes that are overly imprecise?
     //   see matchPrecision and locationPositionalAccuracy in specs/glossary
-    //   http://www.data.gov.bc.ca/dbc/geographic/locate/physical_address_geo/glossary_of_terms.page
+    //   https://github.com/bcgov/api-specs/blob/master/geocoder/glossary.md
 
     // TODO: is there a min acceptable score to ensure we're getting the same address?
     //   for example: 101 Anywhere Street, Kitchener, BC  geocodes to  101 Kitchener St, Ladysmith, BC;
