@@ -151,6 +151,8 @@ class CRM_Utils_Geocode_DataBC {
 
     // TODO: implement hook https://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_geocoderFormat
     //   as of 4.7.7+
+    // This hook allows you to manipulate the Address object during geocoding, for instance to extract
+    // additional fields from the geocoder's returned XML.
   }
 }
 
