@@ -126,9 +126,6 @@ class CRM_Utils_Geocode_DataBC {
     $request = new HTTP_Request($query);
     $request->sendRequest();
     $string = $request->getResponseBody();
-
-    // @totten
-    // $string = CRM_Utils_HttpClient::singleton()->get($query);
     $result = json_decode($string, TRUE);
 
     if ($result === FALSE) {
