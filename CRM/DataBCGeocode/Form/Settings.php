@@ -44,9 +44,9 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
   function setDefaultValues() {
 
     $defaults = array(
-      'match_threshold' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_threshold', NULL, self::D_THRESHOLD),
-      'match_precision' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_precision', NULL, self::D_PRECISION),
-      'backup_geoProvider' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'backup_geoProvider'),
+      'match_threshold' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_match_threshold', NULL, self::D_THRESHOLD),
+      'match_precision' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_match_precision', NULL, self::D_PRECISION),
+      'backup_geoProvider' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_backup_geoProvider'),
     );
 
     return $defaults;
@@ -57,10 +57,10 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     $values = $this->exportValues();
 
     if (CRM_Utils_Array::value('match_threshold', $values)) {
-      CRM_Core_BAO_Setting::setItem($values['match_threshold'], 'bcdatageocode', 'match_threshold');
-      CRM_Core_BAO_Setting::setItem($values['match_precision'], 'bcdatageocode', 'match_precision');
+      CRM_Core_BAO_Setting::setItem($values['match_threshold'], 'bcdatageocode', 'bcdata_match_threshold');
+      CRM_Core_BAO_Setting::setItem($values['match_precision'], 'bcdatageocode', 'bcdata_match_precision');
+      CRM_Core_BAO_Setting::setItem($values['backup_geoProvider'], 'bcdatageocode', 'bcdata_backup_geoProvider');
     }
-    CRM_Core_BAO_Setting::setItem($values['backup_geoProvider'], 'bcdatageocode', 'backup_geoProvider');
 
     parent::postProcess();
 

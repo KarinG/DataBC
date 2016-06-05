@@ -67,7 +67,7 @@ class CRM_Utils_Geocode_DataBC {
 
     if (CRM_Utils_Array::value('state_province_id', $values) != '1101') {
       // if we get here we are NOT in British Columbia - try BackUp method!
-      $backupgeoProvider = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'backup_geoProvider');
+      $backupgeoProvider = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_backup_geoProvider');
 
       if ($backupgeoProvider == 'Google') {
         $class = new CRM_Utils_Geocode_Google();
@@ -96,12 +96,8 @@ class CRM_Utils_Geocode_DataBC {
     $add .= ', BC';
     $add = urlencode($add);
 
-    $minScore = CRM_Core_BAO_Setting::getItem('bcdatageocode',
-      'match_threshold',
-      NULL,
-      CRM_DataBCGeocode_Form_Settings::D_THRESHOLD);
-
-    $selectedPrecision = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_precision');
+    $minScore = CRM_Core_BAO_Setting::getItem('bcdatageocode','bcdata_match_threshold');
+    $selectedPrecision = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_match_precision');
 
     $precisions = array(
       0 => 'CIVIC_NUMBER',
@@ -152,6 +148,9 @@ class CRM_Utils_Geocode_DataBC {
     // TODO: is there a min acceptable score to ensure we're getting the same address?
     //   for example: 101 Anywhere Street, Kitchener, BC  geocodes to  101 Kitchener St, Ladysmith, BC;
     //            18 Wellington St N, Kitchener, BC geocodes to 18 Wellington St, New Westminster, BC
+
+    // TODO: implement hook https://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_geocoderFormat
+    //   as of 4.7.7+
   }
 }
 
