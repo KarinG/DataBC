@@ -6,13 +6,6 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
 
   const D_THRESHOLD = 80;
   const D_PRECISION = 'STREET';
-  const PRECISIONS = array(
-    'CIVIC_NUMBER',
-    'BLOCK',
-    'STREET',
-    'LOCALITY',
-    'PROVINCE',
-  );
 
   function buildQuickForm() {
 
@@ -20,10 +13,15 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     $this->addElement('text', 'match_threshold', ts('Match Threshold'));
 
     // allow admin to specify precision level
-    $precisions = array();
-    foreach (self::PRECISIONS as $mc) {
-      $precisions[$mc] = ts($mc);
-    }
+    $precisions = array(
+      0 => 'CIVIC_NUMBER',
+      1 => 'BLOCK',
+      2 => 'STREET',
+      3 => 'LOCALITY',
+      4 => 'CIVIC_NUMBER',
+      5 => 'PROVINCE'
+    );
+
     $this->addRadio('match_precision', ts('Match Precision'), $precisions, NULL, '<br />');
 
     // add Backup_GeoCoder Provider (for non BC addresses):
