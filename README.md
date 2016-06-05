@@ -24,7 +24,7 @@ Install as any other regular CiviCRM extension:
 
 <h2>Usage</h2>
 
-The DataBC is injected everywhere a the CiviCRM Geocoder is called: so Edit of an Address -> Save but also in the Administer -> System Settings -> Address Geocoder Job.
+The DataBC is injected everywhere a the CiviCRM Geocoder is called: so Edit of an Address -> Save but also in the Administer -> System Settings -> Address Geocoder Job
 
 <h2>Support</h2>
 
