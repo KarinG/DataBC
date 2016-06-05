@@ -108,8 +108,7 @@ class CRM_Utils_Geocode_DataBC {
       1 => 'BLOCK',
       2 => 'STREET',
       3 => 'LOCALITY',
-      4 => 'CIVIC_NUMBER',
-      5 => 'PROVINCE'
+      4 => 'PROVINCE',
     );
 
     foreach ($precisions as $mc) {

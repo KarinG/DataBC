@@ -18,8 +18,7 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
       1 => 'BLOCK',
       2 => 'STREET',
       3 => 'LOCALITY',
-      4 => 'CIVIC_NUMBER',
-      5 => 'PROVINCE'
+      4 => 'PROVINCE',
     );
 
     $this->addRadio('match_precision', ts('Match Precision'), $precisions, NULL, '<br />');
