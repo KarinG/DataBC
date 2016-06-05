@@ -4,15 +4,17 @@ This extension adds gives administrators the option to set the primary Geocoding
 
 To download the latest version of this module: https://github.com/KarinG/DataBC
 
-This extension was sponsored by: British Columbia New Democratic Party
-Warnings
+This extension was sponsored by: <b>British Columbia New Democratic Party</b>
+
+<h2>Warnings</h2>
 
 If you have a lot of addresses outside of British Columbia - you may still run into Google Geocoding limits!
-Requirements
+
+<h2>Requirements</h2>
 
 CiviCRM 4.4 or 4.6 (other versions untested)
 
-Installation
+<h2>Installation</h2>
 
 Install as any other regular CiviCRM extension:
 
@@ -25,9 +27,11 @@ The DataBC is injected everywhere a the CiviCRM Geocoder is called: so Edit of a
 Support
 
 Please post bug reports in the issue tracker of this project on github: https://github.com/KarinG/DataBC/issues
-License
+
+<h2>License</h2>
 
 AGPL-3.0
-Copyright of the data + reference to Terms & Conditions
+
+<h2>Copyright of the data + reference to Terms & Conditions</h2
 
 Copyright © 2016, Province of British Columbia. Contains information licensed under the Open Government License – British Columbia. http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/open-government-license-bc http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/api-terms-of-use-for-ogl-information
