@@ -101,19 +101,24 @@ class CRM_Utils_Geocode_DataBC {
       NULL,
       CRM_DataBCGeocode_Form_Settings::D_THRESHOLD);
 
-    $selectedPrecision = CRM_Core_BAO_Setting::getItem('bcdatageocode',
-      'match_precision',
-      NULL,
-      CRM_DataBCGeocode_Form_Settings::D_PRECISION);
+    $selectedPrecision = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_precision');
 
-    $precisions = array();
-    foreach (CRM_DataBCGeocode_Form_Settings::PRECISIONS as $mc) {
-      $precisions[] = $mc;
-      if ($mc == $selectedPrecision) {
+    $precisions = array(
+      0 => 'CIVIC_NUMBER',
+      1 => 'BLOCK',
+      2 => 'STREET',
+      3 => 'LOCALITY',
+      4 => 'CIVIC_NUMBER',
+      5 => 'PROVINCE'
+    );
+
+    foreach ($precisions as $mc) {
+      $precisions_x[] = $mc;
+      if ($mc == $precisions[$selectedPrecision]) {
         break;
       }
     }
-    $matchPrecisions = urlencode(implode(',', $precisions));
+    $matchPrecisions = urlencode(implode(',', $precisions_x));
 
     $query = 'http://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
 
@@ -121,6 +126,9 @@ class CRM_Utils_Geocode_DataBC {
     $request = new HTTP_Request($query);
     $request->sendRequest();
     $string = $request->getResponseBody();
+
+    // @totten
+    // $string = CRM_Utils_HttpClient::singleton()->get($query);
     $result = json_decode($string, TRUE);
 
     if ($result === FALSE) {
