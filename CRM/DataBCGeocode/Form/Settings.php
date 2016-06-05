@@ -1,7 +1,5 @@
 <?php
 
-require_once 'CRM/Core/Form.php';
-
 class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
 
   const D_THRESHOLD = 80;
@@ -24,7 +22,10 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     $this->addRadio('match_precision', ts('Match Precision'), $precisions, NULL, '<br />');
 
     // add Backup_GeoCoder Provider (for non BC addresses):
-    $backup_geo = CRM_Core_SelectValues::geoProvider();
+    $all_geo = CRM_Core_SelectValues::geoProvider();
+    // check for DataBC and remove it from the array:
+    $backup_geo = array_diff($all_geo, array('DataBC'));
+
     $this->addElement('select', 'backup_geoProvider', ts('Backup Geocoding Provider'), array('' => '- select -') + $backup_geo);
 
     $this->addButtons(array(
@@ -45,7 +46,7 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     $defaults = array(
       'match_threshold' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_threshold', NULL, self::D_THRESHOLD),
       'match_precision' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'match_precision', NULL, self::D_PRECISION),
-      'backup_geoProvider' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'backup_geoProvider', NULL, self::D_PRECISION),
+      'backup_geoProvider' => CRM_Core_BAO_Setting::getItem('bcdatageocode', 'backup_geoProvider'),
     );
 
     return $defaults;
