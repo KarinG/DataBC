@@ -12,7 +12,7 @@ This extension was sponsored by: <b>British Columbia New Democratic Party</b>
 <h2>Warnings</h2>
 
 a) If you have a lot of addresses outside of British Columbia - you may still run into Google Geocoding limits!
-b) This is brand new - wanting to fast track this as this could potentially help lots of BC Organzations - keep a close eye on results
+b) This is brand new - wanting to fast track this as this could potentially help lots of BC Organzations - keep a close eye on results!
 
 <h2>Requirements</h2>
 
