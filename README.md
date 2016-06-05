@@ -32,6 +32,6 @@ Please post bug reports in the issue tracker of this project on github: https://
 
 AGPL-3.0
 
-<h2>Copyright of the data + reference to Terms & Conditions</h2
+<h2>Copyright of the data + reference to Terms & Conditions</h2>
 
 Copyright © 2016, Province of British Columbia. Contains information licensed under the Open Government License – British Columbia. http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/open-government-license-bc http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/api-terms-of-use-for-ogl-information
