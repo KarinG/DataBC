@@ -1,4 +1,4 @@
-CiviCRM Extension that uses DataBC Geographic Data and Services to GeoCode British Columbia (Canada) addresses
+<h1>CiviCRM Extension that uses DataBC Geographic Data and Services to GeoCode British Columbia (Canada) addresses</h1>
 
 This extension adds gives administrators the option to set the primary Geocoding method to DataBC in the Administer -> System Settings -> Mapping & Geocoding. Administrators can set a backup Geocoding method on: /civicrm/admin/setting/databcgeocode for addresses outside of British Columbia.
 
