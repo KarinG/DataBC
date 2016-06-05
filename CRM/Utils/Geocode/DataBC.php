@@ -71,13 +71,11 @@ class CRM_Utils_Geocode_DataBC {
       $backupgeoProvider = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'backup_geoProvider');
 
       if ($backupgeoProvider == 'Google') {
-        require_once('CRM/Utils/Geocode/Google.php');
         $class = new CRM_Utils_Geocode_Google();
         $class->format($values, $stateName = FALSE);
         return TRUE;
       }
       elseif ($backupgeoProvider == 'Yahoo') {
-        require_once('CRM/Utils/Geocode/Yahoo.php');
         $class = new CRM_Utils_Geocode_Yahoo();
         $class->format($values, $stateName = FALSE);
         return TRUE;
