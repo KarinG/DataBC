@@ -62,7 +62,6 @@ class CRM_Utils_Geocode_DataBC {
    */
   static function format(&$values, $stateName = FALSE) {
     // we need a BC Province: 1101
-    $test = 0;
 
     $config = CRM_Core_Config::singleton();
 
