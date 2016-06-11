@@ -2,7 +2,7 @@
 
 class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
 
-  const D_THRESHOLD = 80;
+  const D_THRESHOLD = 75;
   const D_PRECISION = 'STREET';
 
   function buildQuickForm() {
