@@ -4,6 +4,8 @@ This extension adds gives administrators the option to set the primary Geocoding
 
 MatchPrecision is the level of precision of an address match. It is explained here: https://github.com/bcgov/api-specs/blob/master/geocoder/glossary.md#matchPrecision
 We've been testing with defaults "75" for Threshold and "STREET" for Precision
+This PDF explains more about the match score and gives some concrete examples of how it is calculated:
+http://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/initiatives-plans-strategies/databc/geocoder/understanding_geocoder_results.pdf
 
 To download the latest version of this module: https://github.com/KarinG/DataBC
 
