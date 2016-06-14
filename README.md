@@ -13,8 +13,9 @@ This extension was sponsored by: <b>British Columbia New Democratic Party</b>
 
 <h2>Warnings</h2>
 
-a) If you have a lot of addresses outside of British Columbia - you may still run into Google Geocoding limits!
-b) This is brand new - wanting to fast track this as this could potentially help lots of BC Organzations - keep a close eye on results!
+a) If you have a lot of addresses outside of British Columbia - you may still run into Google Geocoding limits!</br>
+b) This is brand new - wanting to fast track this as this could potentially help lots of BC Organzations - keep a close eye on results!</br>
+c) The default Match Threshold is set at 75 which will only return geocodes for addresses that contain a valid civic number and street. Addresses with misspelled localities and/or a missing province will still return a geocode match. Invalid civic numbers and street names will not return a geocode. A link to a PDF with  instructions on choosing a proper Match Threshold will be provided.
 
 <h2>Requirements</h2>
 
