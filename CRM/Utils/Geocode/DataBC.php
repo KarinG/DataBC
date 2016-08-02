@@ -90,9 +90,12 @@ class CRM_Utils_Geocode_DataBC {
     }
 
     // The BCData geocoder does not look at postal code. Civic address only.
-    // TODO: should the request consider supplemental_address_1 & 2?
     $add = '';
-    $add .= CRM_Utils_Array::value('street_address', $values) . ', ' . CRM_Utils_Array::value('city', $values);
+    $add .= CRM_Utils_Array::value('street_address', $values);
+    if (CRM_Utils_Array::value('supplemental_address_1', $values)) {
+         $add .= ', ' . CRM_Utils_Array::value('supplemental_address_1', $values);
+    }
+    $add .= ', ' . CRM_Utils_Array::value('city', $values);
     $add .= ', BC';
     $add = urlencode($add);
 
