@@ -65,7 +65,8 @@ class CRM_Utils_Geocode_DataBC {
 
     $config = CRM_Core_Config::singleton();
 
-    if (CRM_Utils_Array::value('state_province_id', $values) != '1101') {
+    if ((CRM_Utils_Array::value('state_province_id', $values) != '1101') && (CRM_Utils_Array::value('state_province', $values) != 'British Columbia'))
+    {
       // if we get here we are NOT in British Columbia - try BackUp method!
       $backupgeoProvider = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_backup_geoProvider');
 
