@@ -121,9 +121,6 @@ class CRM_Utils_Geocode_DataBC {
     $query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&addressString=' . $add;
     //$query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
 
-    // https://geocoder.api.gov.bc.ca/addresses.json?addressString=3307%20Blossom%20Court%2C%20Abbotsford%2C%20BC&minScore=75&matchPrecision=CIVIC_NUMBER
-    // "fullAddress": "3307 Blossom Crt, Abbotsford, BC",
-
     require_once 'HTTP/Request.php';
     $request = new HTTP_Request($query, array(
       'timeout' =>  '3',
@@ -147,8 +144,21 @@ class CRM_Utils_Geocode_DataBC {
       if (isset($first_match['geometry']['coordinates'])) {
         $values['geo_code_1'] = $first_match['geometry']['coordinates'][1];
         $values['geo_code_2'] = $first_match['geometry']['coordinates'][0];
-        return TRUE;
       }
+      if (isset($first_match['properties'])) {
+        $values['street_unit'] = $first_match['properties']['unitNumber'];
+        $values['street_number'] = $first_match['properties']['civicNumber'];
+        $values['street_name'] = $first_match['properties']['streetName'];
+        $values['street_type'] = $first_match['properties']['streetType'];
+        $values['city'] = $first_match['properties']['localityName'];
+
+        // Format the Postal Code: no spaces and all UPPER case
+        $values['postal_code'] = strtoupper(str_replace(' ', '', $values['postal_code']));
+
+        // Paste together street_address
+        $values['street_address'] = $values['street_number'] . ' ' . $values['street_name'] . ' ' . $values['street_type'];
+      }
+      return TRUE;
     }
 
     // reset the geo code values if we did not get any good values
