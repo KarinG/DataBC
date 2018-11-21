@@ -119,11 +119,19 @@ class CRM_Utils_Geocode_DataBC {
     }
     $matchPrecisions = urlencode(implode(',', $precisions_x));
 
-    $query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
+    $query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&addressString=' . $add;
+    //$query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
 
     require_once 'HTTP/Request.php';
-    $request = new HTTP_Request($query);
-    $request->sendRequest();
+    $request = new HTTP_Request($query, array(
+      'timeout' =>  '3',
+    ));
+    $response = $request->sendRequest();
+    if (PEAR::isError($response)) {
+      CRM_Core_Error::debug_var('DataBC Geocoding failed');
+      return FALSE;
+    }
+
     $string = $request->getResponseBody();
     $result = json_decode($string, TRUE);
 
