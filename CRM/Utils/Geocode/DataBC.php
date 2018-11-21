@@ -40,7 +40,7 @@ class CRM_Utils_Geocode_DataBC {
    * @var string
    * @static
    */
-  static protected $_server = 'apps.gov.bc.ca';
+  static protected $_server = 'geocoder.api.gov.bc.ca/';
 
   /**
    * uri of service
@@ -48,7 +48,7 @@ class CRM_Utils_Geocode_DataBC {
    * @var string
    * @static
    */
-  static protected $_uri = '/pub/geocoder/addresses.geojson';
+  static protected $_uri = 'addresses.geojson';
 
   /**
    * function that takes an address object and gets the latitude / longitude for this
@@ -56,7 +56,6 @@ class CRM_Utils_Geocode_DataBC {
    * the address into a more valid format
    *
    * @param object $address
-   *
    * @return boolean true if we modified the address, false otherwise
    * @static
    */
@@ -121,6 +120,9 @@ class CRM_Utils_Geocode_DataBC {
 
     $query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&addressString=' . $add;
     //$query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
+
+    // https://geocoder.api.gov.bc.ca/addresses.json?addressString=3307%20Blossom%20Court%2C%20Abbotsford%2C%20BC&minScore=75&matchPrecision=CIVIC_NUMBER
+    // "fullAddress": "3307 Blossom Crt, Abbotsford, BC",
 
     require_once 'HTTP/Request.php';
     $request = new HTTP_Request($query, array(
