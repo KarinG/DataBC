@@ -150,13 +150,15 @@ class CRM_Utils_Geocode_DataBC {
         $values['street_number'] = $first_match['properties']['civicNumber'];
         $values['street_name'] = $first_match['properties']['streetName'];
         $values['street_type'] = $first_match['properties']['streetType'];
+        $values['street_number_postdirectional'] = $first_match['properties']['streetDirection'];
         $values['city'] = $first_match['properties']['localityName'];
 
         // Format the Postal Code: no spaces and all UPPER case
         $values['postal_code'] = strtoupper(str_replace(' ', '', $values['postal_code']));
+        $values['postal_code'] = chunk_split($values['postal_code'], 3, ' ');
 
         // Paste together street_address
-        $values['street_address'] = $values['street_number'] . ' ' . $values['street_name'] . ' ' . $values['street_type'];
+        $values['street_address'] = $values['street_number'] . ' ' . $values['street_name'] . ' ' . $values['street_type'] . ' ' . $values['street_number_postdirectional'];
       }
       return TRUE;
     }
