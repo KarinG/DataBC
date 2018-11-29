@@ -146,11 +146,12 @@ class CRM_Utils_Geocode_DataBC {
         $values['geo_code_2'] = $first_match['geometry']['coordinates'][0];
       }
       if (isset($first_match['properties'])) {
-        $values['street_unit'] = $first_match['properties']['unitNumber'];
-        $values['street_number'] = $first_match['properties']['civicNumber'];
-        $values['street_name'] = $first_match['properties']['streetName'];
-        $values['street_type'] = $first_match['properties']['streetType'];
-        $values['street_number_postdirectional'] = $first_match['properties']['streetDirection'];
+        //$values['street_unit'] = $first_match['properties']['unitNumber'];
+        //$values['street_number'] = $first_match['properties']['civicNumber'];
+        //$values['street_name'] = $first_match['properties']['streetName'];
+        //$values['street_type'] = $first_match['properties']['streetType'];
+        //$values['street_number_postdirectional'] = $first_match['properties']['streetDirection'];
+
         $values['city'] = $first_match['properties']['localityName'];
 
         // Format the Postal Code: no spaces and all UPPER case
@@ -158,7 +159,7 @@ class CRM_Utils_Geocode_DataBC {
         $values['postal_code'] = chunk_split($values['postal_code'], 3, ' ');
 
         // Paste together street_address
-        $values['street_address'] = $values['street_number'] . ' ' . $values['street_name'] . ' ' . $values['street_type'] . ' ' . $values['street_number_postdirectional'];
+        $values['street_address'] = $first_match['properties']['unitNumber'] . ' ' . $first_match['properties']['civicNumber'] . ' ' . $first_match['properties']['streetName'] . ' ' . $first_match['properties']['streetType'] . ' ' . $first_match['properties']['streetDirection'];
       }
       return TRUE;
     }
