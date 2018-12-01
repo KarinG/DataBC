@@ -91,9 +91,15 @@ class CRM_Utils_Geocode_DataBC {
 
     // The BCData geocoder does not look at postal code. Civic address only.
     $add = '';
+    if (strpos(strtoupper(str_replace(' ', '', CRM_Utils_Array::value('street_address', $values))), 'POBOX') !== false) {
+      return FALSE;
+    }
     $add .= CRM_Utils_Array::value('street_address', $values);
     if (CRM_Utils_Array::value('supplemental_address_1', $values)) {
-         $add .= ', ' . CRM_Utils_Array::value('supplemental_address_1', $values);
+      if (strpos(strtoupper(str_replace(' ', '', CRM_Utils_Array::value('supplemental_address_1', $values))), 'POBOX') !== false) {
+        return FALSE;
+      }
+      $add .= ', ' . CRM_Utils_Array::value('supplemental_address_1', $values);
     }
     $add .= ', ' . CRM_Utils_Array::value('city', $values);
     $add .= ', BC';
@@ -146,19 +152,14 @@ class CRM_Utils_Geocode_DataBC {
         $values['geo_code_2'] = $first_match['geometry']['coordinates'][0];
       }
       if (isset($first_match['properties'])) {
-        //$values['street_unit'] = $first_match['properties']['unitNumber'];
-        //$values['street_number'] = $first_match['properties']['civicNumber'];
-        //$values['street_name'] = $first_match['properties']['streetName'];
-        //$values['street_type'] = $first_match['properties']['streetType'];
-        //$values['street_number_postdirectional'] = $first_match['properties']['streetDirection'];
-
         $values['city'] = $first_match['properties']['localityName'];
 
-        // Format the Postal Code: no spaces and all UPPER case
+        // Format the Postal Code: all UPPER case and SPACE
         $values['postal_code'] = strtoupper(str_replace(' ', '', $values['postal_code']));
         $values['postal_code'] = chunk_split($values['postal_code'], 3, ' ');
 
         // Paste together street_address
+        // We are -not- returning the individual components to CiviCRM as it's not getting the parsing correct
         $values['street_address'] = $first_match['properties']['unitNumber'] . ' ' . $first_match['properties']['civicNumber'] . ' ' . $first_match['properties']['streetName'] . ' ' . $first_match['properties']['streetType'] . ' ' . $first_match['properties']['streetDirection'];
       }
       return TRUE;
