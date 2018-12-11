@@ -160,7 +160,7 @@ class CRM_Utils_Geocode_DataBC {
 
         // Paste together street_address
         // We are -not- returning the individual components to CiviCRM as it's not getting the parsing correct
-        $values['street_address'] = $first_match['properties']['unitNumber'] . ' ' . $first_match['properties']['civicNumber'] . ' ' . $first_match['properties']['streetName'] . ' ' . $first_match['properties']['streetType'] . ' ' . $first_match['properties']['streetDirection'];
+        $values['street_address'] = $first_match['properties']['unitNumber'] . $first_match['properties']['unitNumberSuffix'] . ' ' . $first_match['properties']['civicNumber'] . ' ' . $first_match['properties']['streetName'] . ' ' . $first_match['properties']['streetType'] . ' ' . $first_match['properties']['streetDirection'];
       }
       return TRUE;
     }
