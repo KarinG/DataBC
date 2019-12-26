@@ -1,11 +1,11 @@
 <h1>CiviCRM Extension that uses DataBC Geographic Data and Services to GeoCode British Columbia (Canada) addresses</h1>
 
-This extension adds gives administrators the option to set the primary Geocoding method to DataBC in the Administer -> System Settings -> Mapping & Geocoding. Administrators can set a backup Geocoding method on: /civicrm/admin/setting/databcgeocode for addresses outside of British Columbia. 
+This extension gives administrators the option to set the primary Geocoding method to DataBC in the Administer -> System Settings -> Mapping & Geocoding. Administrators can set a backup Geocoding method on: /civicrm/admin/setting/databcgeocode for addresses outside of British Columbia. 
 
 MatchPrecision is the level of precision of an address match. It is explained here: https://github.com/bcgov/api-specs/blob/master/geocoder/glossary.md#matchPrecision
 We've been testing with defaults "75" for Threshold and "STREET" for Precision
 This PDF explains more about the match score and gives some concrete examples of how it is calculated:
-http://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/initiatives-plans-strategies/databc/geocoder/understanding_geocoder_results.pdf
+https://www2.gov.bc.ca/assets/gov/data/geographic/location-services/geocoder/understanding_geocoder_results.pdf
 
 To download the latest version of this module: https://github.com/KarinG/DataBC
 
@@ -14,7 +14,7 @@ This extension was sponsored by: <b>British Columbia New Democratic Party</b>
 <h2>Warnings</h2>
 
 a) If you have a lot of addresses outside of British Columbia - you may still run into Google Geocoding limits!</br>
-b) This is brand new - wanting to fast track this as this could potentially help lots of BC Organzations - keep a close eye on results!</br>
+b) This is brand new - wanting to fast track this as this could potentially help lots of BC Organizations - keep a close eye on results!</br>
 c) The default Match Threshold is set at 75 which will only return geocodes for addresses that contain a valid civic number and street. Addresses with misspelled localities and/or a missing province will still return a geocode match. Invalid civic numbers and street names will not return a geocode. A link to a PDF with  instructions on choosing a proper Match Threshold will be provided.
 
 <h2>Requirements</h2>
