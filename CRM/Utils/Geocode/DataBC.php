@@ -127,17 +127,18 @@ class CRM_Utils_Geocode_DataBC {
     $query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&addressString=' . $add;
     //$query = 'https://' . self::$_server . self::$_uri . '?minScore=' . $minScore . '&matchPrecision=' . $matchPrecisions . '&addressString=' . $add;
 
-    require_once 'HTTP/Request.php';
-    $request = new HTTP_Request($query, array(
-      'timeout' =>  '3',
-    ));
-    $response = $request->sendRequest();
-    if (PEAR::isError($response)) {
+    $client = new GuzzleHttp\Client();
+    try {
+      $request = $client->request('GET', $query, [
+        'timeout' =>  '3',
+      ]);
+    }
+    catch (Exception $e) {
       CRM_Core_Error::debug_var('DataBC Geocoding failed');
       return FALSE;
     }
 
-    $string = $request->getResponseBody();
+    $string = $request->getBody();
     $result = json_decode($string, TRUE);
 
     if ($result === FALSE) {
