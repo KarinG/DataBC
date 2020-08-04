@@ -19,7 +19,7 @@ c) The default Match Threshold is set at 75 which will only return geocodes for 
 
 <h2>Requirements</h2>
 
-CiviCRM 4.4 or 4.6 (other versions untested)
+CiviCRM ESR (minimum)
 
 <h2>Installation</h2>
 
