@@ -3,7 +3,9 @@
   <file>databcgeocode</file>
   <name>Data BC Physical Address Geocoder</name>
   <description>Submits addresses to the Data BC Physical Address Geocoder (http://www.data.gov.bc.ca/dbc/geographic/locate/geocoding.page). A replacement for Google geocoding for orgs based in British Columbia, Canada.</description>
-  <license>AGPL-3.0</license>
+  <urls>
+    <url desc="Documentation">https://github.com/KarinG/DataBC/blob/master/README.md</url>
+  </urls><license>AGPL-3.0</license>
   <maintainer>
     <author>Karin Gerritsen, Jake Martin White</author>
     <email>karin@semper-it.com</email>
