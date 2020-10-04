@@ -134,7 +134,7 @@ class CRM_Utils_Geocode_DataBC {
       ]);
     }
     catch (Exception $e) {
-      CRM_Core_Error::debug_var('DataBC Geocoding failed');
+      CRM_Core_Error::debug_log_message('DataBC Geocoding failed', $out = false );
       return FALSE;
     }
 
@@ -142,7 +142,7 @@ class CRM_Utils_Geocode_DataBC {
     $result = json_decode($string, TRUE);
 
     if ($result === FALSE) {
-      CRM_Core_Error::debug_var('DataBC Geocoding failed');
+      CRM_Core_Error::debug_log_message('DataBC Geocoding failed', $out = false );
       return FALSE;
     }
 
