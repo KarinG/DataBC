@@ -67,7 +67,7 @@ class CRM_Utils_Geocode_DataBC {
     if ((CRM_Utils_Array::value('state_province_id', $values) != '1101') && (CRM_Utils_Array::value('state_province', $values) != 'British Columbia'))
     {
       // if we get here we are NOT in British Columbia - try BackUp method!
-      $backupgeoProvider = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_backup_geoProvider');
+      $backupgeoProvider = Civi::settings()->get('bcdata_backup_geoProvider');
 
       if ($backupgeoProvider == 'Google') {
         $class = new CRM_Utils_Geocode_Google();
@@ -105,8 +105,8 @@ class CRM_Utils_Geocode_DataBC {
     $add .= ', BC';
     $add = urlencode($add);
 
-    $minScore = CRM_Core_BAO_Setting::getItem('bcdatageocode','bcdata_match_threshold');
-    $selectedPrecision = CRM_Core_BAO_Setting::getItem('bcdatageocode', 'bcdata_match_precision');
+    $minScore = Civi::settings()->get('bcdata_match_threshold');
+    $selectedPrecision = Civi::settings()->get('bcdata_match_precision');
 
     $precisions = array(
       0 => 'CIVIC_NUMBER',
