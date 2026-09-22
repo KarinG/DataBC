@@ -108,13 +108,13 @@ class CRM_Utils_Geocode_DataBC {
     $minScore = Civi::settings()->get('bcdata_match_threshold');
     $selectedPrecision = Civi::settings()->get('bcdata_match_precision');
 
-    $precisions = array(
+    $precisions = [
       0 => 'CIVIC_NUMBER',
       1 => 'BLOCK',
       2 => 'STREET',
       3 => 'LOCALITY',
       4 => 'PROVINCE',
-    );
+    ];
 
     foreach ($precisions as $mc) {
       $precisions_x[] = $mc;

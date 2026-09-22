@@ -11,30 +11,30 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     $this->addElement('text', 'match_threshold', ts('Match Threshold'));
 
     // allow admin to specify precision level
-    $precisions = array(
+    $precisions = [
       0 => 'CIVIC_NUMBER',
       1 => 'BLOCK',
       2 => 'STREET',
       3 => 'LOCALITY',
       4 => 'PROVINCE',
-    );
+    ];
 
     $this->addRadio('match_precision', ts('Match Precision'), $precisions, NULL, '<br />');
 
     // add Backup_GeoCoder Provider (for non BC addresses):
     $all_geo = CRM_Core_SelectValues::geoProvider();
     // check for DataBC and remove it from the array:
-    $backup_geo = array_diff($all_geo, array('DataBC'));
+    $backup_geo = array_diff($all_geo, ['DataBC']);
 
-    $this->addElement('select', 'backup_geoProvider', ts('Backup Geocoding Provider'), array('' => '- select -') + $backup_geo);
+    $this->addElement('select', 'backup_geoProvider', ts('Backup Geocoding Provider'), ['' => '- select -'] + $backup_geo);
 
-    $this->addButtons(array(
-      array(
+    $this->addButtons([
+      [
         'type' => 'submit',
         'name' => ts('Submit'),
         'isDefault' => TRUE,
-      ),
-    ));
+      ],
+    ]);
 
     $this->assign('elementNames', $this->getRenderableElementNames());
     parent::buildQuickForm();
@@ -43,11 +43,11 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
 
   function setDefaultValues() {
 
-    $defaults = array(
+    $defaults = [
       'match_threshold' => Civi::settings()->get('bcdata_match_threshold') ?? self::D_THRESHOLD,
       'match_precision' => Civi::settings()->get('bcdata_match_precision') ?? self::D_PRECISION,
       'backup_geoProvider' => Civi::settings()->get('bcdata_backup_geoProvider'),
-    );
+    ];
 
     return $defaults;
   }
@@ -76,7 +76,7 @@ class CRM_DataBCGeocode_Form_Settings extends CRM_Core_Form {
     // auto-rendered in the loop -- such as "qfKey" and "buttons".  These
     // items don't have labels. We'll identify renderable by filtering on
     // the 'label'.
-    $elementNames = array();
+    $elementNames = [];
     foreach ($this->_elements as $element) {
       /** @var HTML_QuickForm_Element $element */
       $label = $element->getLabel();
