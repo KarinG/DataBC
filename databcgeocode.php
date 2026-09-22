@@ -45,12 +45,12 @@ function databcgeocode_civicrm_buildForm($formName, &$form) {
   $geo = CRM_Core_SelectValues::geoProvider();
   $geo['DataBC'] = 'DataBC';
   // add DataBC option to existing GeoCoder Providers:
-  $form->addElement('select', 'geoProvider', ts('Geocoding Provider'), array('' => '- select -') + $geo);
+  $form->addElement('select', 'geoProvider', ts('Geocoding Provider'), ['' => '- select -'] + $geo);
 
   // add our template:
-  CRM_Core_Region::instance('page-body')->add(array(
+  CRM_Core_Region::instance('page-body')->add([
     'template' => 'CRM/DataBCGeocode/DataBCAdmin.tpl'
-  ));
+  ]);
 }
 
 // /**
